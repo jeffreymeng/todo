@@ -1,0 +1,1 @@
+I have multiple divs on a page with different classes named stuff like `position-1`, `position-2`, and `position-3`. I want to be able to order them so even though if they are scrambled, they will automatically be in order with the `position-1` class first and the `position-3` class last. [Jsfiddle](https://jsfiddle.net/jmeng/hphdLv4c/)
