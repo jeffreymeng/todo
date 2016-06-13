@@ -2,3 +2,26 @@
       top: 20px;
       left:300px;
   }
+  .underlin {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+.underline:focus {
+  outline: none;
+}
+  .underline {
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+}
+.underline:focus,
+.underline.focus {
+  border-bottom: solid 2px #969696;
+}
