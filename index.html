@@ -21,6 +21,8 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Font Awesome Checkboxes (https://github.com/flatlogic/awesome-bootstrap-checkbox) -->
     <link href="css/checkboxes.css" rel="stylesheet">
+     <!-- Datepicker CSS -->
+    <link href="css/datepicker.css" rel="stylesheet">
     <!-- todo custom css -->
     <link href="css/todo.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,7 +67,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Shopping List</h1>
-                        <input class="underline" type="text" placeholder="add an item">
+                        <div id="add-item">
+                            <p>Add an Item<br><b>Item(Required):</b></p>
+                            <input class="form-control" type="text" id="item" placeholder="add an item">
+                            <label for="details">Details/Description</label>
+                            <textarea class="form-control" id="details" height="300px"></textarea>
+                            <label for="deadline">Deadline:</label>
+                            <textarea class="form-control" id="deadline" height="300px"></textarea>
+                        </div>
                         <div id="items">
                             <div id="item-2">
                                 <div class="checkbox checkbox-success">
@@ -92,7 +101,7 @@
                                 </div>
                                 
                                 <div class="collapse" id="item-2-info">
-                                    <p>String cheese is goof on tuesdays, blue cheese on thursdays</p>
+                                    <p>String cheese is good on tuesdays, blue cheese on thursdays</p>
                                     <p><b>Deadline:</b> June 12, 2016</p>
                                 </div>
                             </div>
@@ -126,9 +135,10 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+    <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
+    
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
@@ -138,16 +148,12 @@
         };
         firebase.initializeApp(config);
     </script>
-
+    <!-- Datepicker Javascript -->
+    <script src="js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->
     <script src="js/todo.js"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+    
+
 
 </body>
 
