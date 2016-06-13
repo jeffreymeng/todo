@@ -1,4 +1,5 @@
 /* global $ firebase*/
+
 var database = firebase.database();
 
 $("a.hovertrigger").hover(
@@ -50,10 +51,22 @@ function createTodo(name, uid) {
 
 }
 function getList(id, uid) {
-	var commentsRef = firebase.database().ref('post-comments/' + postId);
-	commentsRef.on('child_added', function(data) {
-  addCommentElement(postElement, data.key, data.val().text, data.val().author);
-});
+	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
+	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
+	$("#lists").html("");
+	ref.once('value', function(d) {
+		var data = d.val();
+		console.log(data);
+		
+		$("#list-title").html(data.title);
+	});
+	
+	childRef.on('child_added', function(d) {
+		var data = d.val();
+		console.log(data);
+		addItem(d.key, data.name, data.description, data.deadline);
+		
+	});
 }
 function addItem(id, name, description, deadline) {
 	var toappend = '' + 
@@ -70,5 +83,5 @@ function addItem(id, name, description, deadline) {
 		        '<p><b>Deadline:</b> ' + deadline + '</p>'
 		    '</div>' + 
         '</div>';
-	$("#items").append(toappend)
+	$("#items").append(toappend);
 }
