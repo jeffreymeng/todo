@@ -12,20 +12,21 @@ $("a.hovertrigger").hover(
 
 function createTodo(name, uid) {
 	// TESTING ONLY!!!
-	uid = uid || "3409faojsniou309ofha393"
-  // A post entry.
-  var postData = {
-    shared:false,
-    name:name
-  };
+	var uid = uid || "3409faojsniou309ofha393";
+	// A post entry.
+	var postData = {
+		shared: false,
+		name: name
+	};
 
-  // Get a key for a new Post.
-  var newPostKey = firebase.database().ref().child('posts').push().key;
+	// Get a key for a new Post.
+	var newPostKey = firebase.database().ref().child('posts').push().key;
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates['/users/' + uid + '/lists/' + newPostKey] = postData;
-
-  return firebase.database().ref().update(updates);
+	// Write the new post's data simultaneously in the posts list and the user's post list.
+	var updates = {};
+	updates['/users/' + uid + '/lists/' + newPostKey] = postData;
+	updates['/users/' + uid + '/lists/names/'] = postData.name;
+	return firebase.database().ref().update(updates);
 
 }
+getList()
