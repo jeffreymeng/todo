@@ -51,3 +51,20 @@ function createTodo(name, uid) {
 function getList(id, uid) {
 	
 }
+function addItem(id, description, deadline) {
+	var toappend = '' + 
+		'<div id="item-' + id + '">' + 
+	        '<div class="checkbox checkbox-success">' + 
+		        '<input id="checkbox' + id + '" class="styled" type="checkbox">' + 
+		        '<label for="checkbox' + id + '">Cheese</label>' + 
+		        '<a class="more-info" data-toggle="collapse" href="#item-' + id + '-info" aria-expanded="false" aria-controls="item-' + id + '-info">' + 
+		            '<i class="fa fa-caret-down"></i>' + 
+		        '</a>' + 
+		    '</div>' + 
+		    '<div class="collapse" id="item-' + id + '-info">' + 
+		        '<p>' + description + '</p>' + 
+		        '<p><b>Deadline:</b> ' + deadline + '</p>'
+		    '</div>' + 
+        '</div>';
+	$("#items").append(toappend)
+}
