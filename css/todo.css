@@ -2,3 +2,7 @@
 .more-info {
     color:black;
 }
+.strikethrough:checked + label {
+  text-decoration:line-through;
+  color:#D3D3D3;
+}
