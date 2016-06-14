@@ -67,12 +67,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 id="list-title">Shopping List</h1>
-                            <input class="form-control" data-toggle="collapse" href="#add-item" aria-expanded="false" aria-controls="add-item" type="text" id="item" placeholder="add an item">
+                            <input class="form-control" type="text" id="item" placeholder="add an item">
                         <div id="add-item" class="collapse">
                             <label for="details">Details/Description</label>
                             <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do."></textarea>
                             <label for="deadline">Deadline:</label>
                               <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
+                              <button class="btn btn-danger" id="cancel">
+                        </div>
                         <div id="items">
                             <div id="item-2">
                                 <div class="checkbox checkbox-success">
@@ -136,7 +138,9 @@
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
-    
+    /* global firebase $ */
+        $("#item").click(function(){$('.collapse').collapse("show");});
+        
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
