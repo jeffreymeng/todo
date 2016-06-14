@@ -50,6 +50,19 @@ function createTodo(name, uid) {
 	return firebase.database().ref().update(updates);
 
 }
+function addItemToFirebase(uid, id, name, description, deadline, priority) {
+	var ref = firebase.database().ref('users/' + uid + '/lists/' + id + '/items')
+	// Write the new post's data simultaneously in the posts list and the user's post list.
+	var data = {
+		title:name,
+		description:description,
+		deadline:deadline,
+		priority:priority
+		
+	};
+	return ref.push(data);
+
+}
 function getList(id, uid) {
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
