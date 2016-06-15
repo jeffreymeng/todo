@@ -63,6 +63,15 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 	return ref.push(data);
 
 }
+function getItemFromFirebase(uid, id) {
+	var x = null;
+firebase.database().ref('/users/' + uid + "/lists/" + id).once('value').then(function(snapshot) {
+  var data = snapshot.val();
+  x = data;
+});
+return x;
+
+}
 function getList(id, uid) {
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
