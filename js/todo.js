@@ -63,9 +63,9 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 	return ref.push(data);
 
 }
-function getItemFromFirebase(uid, id) {
+function getItemFromFirebase(uid, listid, itemid) {
 	var x = null;
-firebase.database().ref('/users/' + uid + "/lists/" + id).once('value').then(function(snapshot) {
+firebase.database().ref('/users/' + uid + "/lists/" + listid + "/items/" + itemid).once('value').then(function(snapshot) {
   var data = snapshot.val();
   console.log(data);
   x = data;
