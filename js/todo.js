@@ -67,6 +67,7 @@ function getItemFromFirebase(uid, id) {
 	var x = null;
 firebase.database().ref('/users/' + uid + "/lists/" + id).once('value').then(function(snapshot) {
   var data = snapshot.val();
+  console.log(data);
   x = data;
 });
 return x;
