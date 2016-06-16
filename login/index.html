@@ -64,7 +64,12 @@
 		});
 	</script>
 	<script>
-		/* global firebase $ */
+		/* global firebase $ auth getQuery */
+
+		auth(function(user) {
+			window.location.href = getQuery("redirect") || "/todo";
+		});
+
 		$(".sign-up #sign-up").click(function() {
 			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
 			$(".login").click(function() {
@@ -85,11 +90,11 @@
 		$("#login-btn").click(function() {
 			if (window.login === "signup") {
 				if ($("#email").val() === "" || $("#email").val().replace(" ", "") === "" || $("#email").val() === null || $("#password").val() === "" || $("#password").val().replace(" ", "") === "" || $("#password").val() === null) {
-					$("#error").html("Both fields are required.")
+					$("#error").html("Both fields are required.");
 				}
 				else {
 					if ($("#password").val() === $("#confirm-password").val()) {
-						var createuser = firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
+						firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
 							if (error.code === "auth/email-already-in-use") {
 								$("#confirm-password").val("");
 								$("#password").val("");
@@ -119,8 +124,9 @@
 								$("#password").val("");
 								$("#error").html("An error occurred. Please try again");
 							}
-							console.log(createuser);
-							console.log(createuser.user);
+						});
+						auth(function(user) {
+							window.location.href = getQuery("redirect") || "/todo";
 						});
 					}
 					else {
@@ -135,7 +141,7 @@
 					$("#error").html("Both fields are required.");
 				}
 				else {
-					var loginuser = firebase.auth().signInWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
+					firebase.auth().signInWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
 						if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-email") {
 							$("#confirm-password").val("");
 							$("#password").val("");
@@ -164,8 +170,10 @@
 						}
 						console.log(error);
 					});
-					console.log(loginuser);
-					console.log(loginuser.user);
+					auth(function(user) {
+						window.location.href = getQuery("redirect") || "/todo";
+					});
+
 				}
 			}
 		});
