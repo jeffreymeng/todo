@@ -11,7 +11,7 @@
   </head>
   <body>
   <div class="form-box">
-    <div class="head" id="title">Welcome Back</div>        
+    <div class="head" id="title">Login</div>        
     <div id="login-form">
         <div class="form-group">
           <label class="label-control">
@@ -62,9 +62,9 @@ $(window).load(function(){
 <script>
 var login = "login";
         $("#sign-up").click(function(){
-          $("#label-text").html("Sign Up");
+          $("#title").html("Sign Up");
           $("#confirm-password-div").css("display", "block")
-          $("#login-btn").value("Sign Up")
+          $("#login-btn").attr("value", "Sign Up")
           window.login = "signup"
         })
         </script>
