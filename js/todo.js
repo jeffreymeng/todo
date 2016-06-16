@@ -1,6 +1,6 @@
 /* global $ firebase*/
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
+function getQuery(name, url) {
+    if (!url) url = window.location.search;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
