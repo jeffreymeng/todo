@@ -11,6 +11,7 @@ function getParameterByName(name, url) {
 
 
 function deleteItem() {
+	window.location.hash = "#delete";
 	$("#confirm-enter-name").attr("data-correct-value");
 	$('#confirm-delete').modal("show");
 	$("#confirm-enter-name").keyup(function(){
