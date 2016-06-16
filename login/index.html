@@ -2,133 +2,166 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <!--=======Font Open Sans======-->
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <!--=======Custom Style======-->
-  <link rel="stylesheet" href="/todo/css/login.css">
-  <link rel="stylesheet" href="/todo/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<!--=======Font Open Sans======-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<!--=======Custom Style======-->
+	<link rel="stylesheet" href="/todo/css/login.css">
+	<link rel="stylesheet" href="/todo/css/bootstrap.min.css">
 
 </head>
 
 <body>
-  <div class="form-box">
-    <div class="head" id="title">Login</div>
-    <div id="login-form">
-      <div class="form-group">
-        <label class="label-control">
-            <span class="label-text">Email</span>
-          </label>
-        <input type="email" name="email" id="email" class="login-form-control" />
-      </div>
-      <div class="form-group">
-        <label class="label-control">
-            <span class="label-text">Password</span>
-          </label>
-        <input type="password" name="password" id="password" class="login-form-control" />
-      </div>
-      <div class="form-group" id="confirm-password-div" style="display:none;">
-        <label class="label-control">
-            <span class="label-text">Confirm Password</span>
-          </label>
-        <input type="password" name="confirmpassword" id="confirm-password" class="login-form-control" />
-      </div>
-      <p class="text-danger" id="error"></p>
-      <input type="button" value="Login" class="login-btn" id="login-btn" />
+	<div class="form-box">
+		<div class="head" id="title">Login</div>
+		<div id="login-form">
+			<div class="form-group">
+				<label class="label-control">
+			<span class="label-text">Email</span>
+		  </label>
+				<input type="email" name="email" id="email" class="login-form-control" />
+			</div>
+			<div class="form-group">
+				<label class="label-control">
+			<span class="label-text">Password</span>
+		  </label>
+				<input type="password" name="password" id="password" class="login-form-control" />
+			</div>
+			<div class="form-group" id="confirm-password-div" style="display:none;">
+				<label class="label-control">
+			<span class="label-text">Confirm Password</span>
+		  </label>
+				<input type="password" name="confirmpassword" id="confirm-password" class="login-form-control" />
+			</div>
+			<p class="text-danger" id="error"></p>
+			<input type="button" value="Login" class="login-btn" id="login-btn" />
 
-      <p class="text-p">Don't have an account? <a id="sign-up">Sign up</a> </p>
-    </div>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-  <script>
-    /* global firebase */
-    var login = "login";
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
-      authDomain: "jeffreytodo.firebaseapp.com",
-      databaseURL: "https://jeffreytodo.firebaseio.com",
-      storageBucket: "",
-    };
-    firebase.initializeApp(config);
-  </script>
-  <script src="/todo/js/jquery.js"></script>
-  <script src="/todo/js/todo.js"></script>
-  <script type="text/javascript">
-    /* global $ */
-    $(window).load(function() {
-      $('.form-group input').on('focus blur', function(e) {
-        $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
-      }).trigger('blur');
-    });
-  </script>
-  <script>
-    /* global firebase $ */
-    $(".sign-up #sign-up").click(function() {
-      $(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
-      $(".login").click(function(){
-              $(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
-      $("#title").html("Login");
-      $("#password").val("");
-      $("#confirm-password-div").css("display", "none");
-      $("#login-btn").attr("value", "Login");
-      window.login = "login";
-            });
-      $("#title").html("Sign Up");
-      $("#password").val("");
-      $("#confirm-password-div").css("display", "block");
-      $("#login-btn").attr("value", "Sign Up");
-      window.login = "signup";
-    });
-    
-    $("#login-btn").click(function() {
-      if (window.login === "signup") {
-        if ($("#password").val() === $("#confirm-password").val()) {
-        var createuser = firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
-          if (error.code === "auth/email-already-in-use") {
-              $("#confirm-password").val("");
-  $("#password").val("");
-            $("#error").html("Your email is already registerd. <a clas='login'>Login</a> instead.");
-            
-            $(".login").click(function(){
-              $(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
-      $("#title").html("Login");
-      $("#password").val("");
-      $("#confirm-password-div").css("display", "none");
-      $("#login-btn").attr("value", "Login");
-      window.login = "login";
-            });
-          } else if (error.code === "auth/invalid-email") {
-              $("#confirm-password").val("");
-  $("#password").val("");
-            $("#error").html("The email you entered is not vaid. Please try again.");
-          } else if (error.code === "auth/weak-password") {
-              $("#confirm-password").val("");
-  $("#password").val("");
-            $("#error").html("The password you entered is too weak. Try adding at least one captial letter, one lowercase letter, and one number, or making it longer.");
-          }
-          console.log(user);
+			<p class="text-p">Don't have an account? <a id="sign-up">Sign up</a> </p>
+		</div>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script>
+		/* global firebase */
+		var login = "login";
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
+			authDomain: "jeffreytodo.firebaseapp.com",
+			databaseURL: "https://jeffreytodo.firebaseio.com",
+			storageBucket: "",
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script src="/todo/js/jquery.js"></script>
+	<script src="/todo/js/todo.js"></script>
+	<script type="text/javascript">
+		/* global $ */
+		$(window).load(function() {
+			$('.form-group input').on('focus blur', function(e) {
+				$(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
+			}).trigger('blur');
+		});
+	</script>
+	<script>
+		/* global firebase $ */
+		$(".sign-up #sign-up").click(function() {
+			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
+			$(".login").click(function() {
+				$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+				$("#title").html("Login");
+				$("#password").val("");
+				$("#confirm-password-div").css("display", "none");
+				$("#login-btn").attr("value", "Login");
+				window.login = "login";
+			});
+			$("#title").html("Sign Up");
+			$("#password").val("");
+			$("#confirm-password-div").css("display", "block");
+			$("#login-btn").attr("value", "Sign Up");
+			window.login = "signup";
+		});
 
-  console.log(createuser);
-});
-} else {
-  $("#confirm-password").val("");
-  $("#password").val("");
-  $("#error").html("The two passwords you entered don't match!");
-}
-      }
-      else {
-        var loginuser = firebase.auth().signInWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
+		$("#login-btn").click(function() {
+			if (window.login === "signup") {
+				if ($("#email").val() === "" || $("#email").val().replace(" ", "") === "" || $("#email").val() === null || $("#password").val() === "" || $("#password").val().replace(" ", "") === "" || $("#password").val() === null) {
+					$("#error").html("Both fields are required.")
+				}
+				else {
+					if ($("#password").val() === $("#confirm-password").val()) {
+						var createuser = firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
+							if (error.code === "auth/email-already-in-use") {
+								$("#confirm-password").val("");
+								$("#password").val("");
+								$("#error").html("Your email is already registerd. <a clas='login'>Login</a> instead.");
 
-          console.log(error);
-        });
-        console.log(loginuser);
-      }
-    });
-
-    
-  </script>
+								$(".login").click(function() {
+									$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+									$("#title").html("Login");
+									$("#password").val("");
+									$("#confirm-password-div").css("display", "none");
+									$("#login-btn").attr("value", "Login");
+									window.login = "login";
+								});
+							}
+							else if (error.code === "auth/invalid-email") {
+								$("#confirm-password").val("");
+								$("#password").val("");
+								$("#error").html("The email you entered is not vaid. Please try again.");
+							}
+							else if (error.code === "auth/weak-password") {
+								$("#confirm-password").val("");
+								$("#password").val("");
+								$("#error").html("The password you entered is too weak. Try adding at least one captial letter, one lowercase letter, and one number, or making it longer.");
+							}
+							else {
+								$("#confirm-password").val("");
+								$("#password").val("");
+								$("#error").html("An error occurred. Please try again");
+							}
+							console.log(createuser);
+							console.log(createuser.user);
+						});
+					}
+					else {
+						$("#confirm-password").val("");
+						$("#password").val("");
+						$("#error").html("The two passwords you entered don't match!");
+					}
+				}
+			}
+			else {
+				if ($("#email").val() === "" || $("#email").val().replace(" ", "") === "" || $("#email").val() === null || $("#password").val() === "" || $("#password").val().replace(" ", "") === "" || $("#password").val() === null) {
+					$("#error").html("Both fields are required.");
+				}
+				else {
+					var loginuser = firebase.auth().signInWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
+						if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-email") {
+							$("#confirm-password").val("");
+							$("#password").val("");
+							$("#error").html("The email/password combo was incorrect. Note that both fields are case sensitive. If you don't have an account, <a class='login'>instead</a>.");
+							$(".login").click(function() {
+								$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+								$("#title").html("Login");
+								$("#password").val("");
+								$("#confirm-password-div").css("display", "none");
+								$("#login-btn").attr("value", "Login");
+								window.login = "login";
+							});
+						}
+						else {
+							$("#confirm-password").val("");
+							$("#password").val("");
+							$("#error").html("An error occurred. Please try again.");
+						}
+						console.log(error);
+					});
+					console.log(loginuser);
+					console.log(loginuser.user);
+				}
+			}
+		});
+	</script>
 </body>
 
 </html>
