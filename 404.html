@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    <div id="loader"><img src="/todo/hourglass.svg" alt="Loading Animation"></div>
 
     <div id="wrapper">
 
@@ -142,7 +143,26 @@
     <!-- Datepicker Javascript -->
     <script src="/todo/js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->
+    <script src="/todo/js/todo.js"></script>
     
+    <script>
+    $(document).load(function(){
+        $("#loader").remove() 
+    });
+        // show list
+        var vars = window.location.pathname.split("/");
+        var uid = vars[2]; // 0 and 1 are '' and 'todo'
+        var listid = vars[3];
+        getList(listid, uid);
+        // check for actions
+        var actions = window.location.hash;
+        if (actions !== null && actions !== "" && actions !=="#" && actions !==" ") {
+            if (actions === "#delete") {
+                deleteItem()
+            }
+        }
+
+    </script>
 
 
 </body>

@@ -31,9 +31,19 @@
         <p class="text-p">Don't have an account? <a id="sign-up">Sign up</a> </p>
     </div>
   </div>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+    /* global firebase $ */
 
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
+            authDomain: "jeffreytodo.firebaseapp.com",
+            databaseURL: "https://jeffreytodo.firebaseio.com",
+            storageBucket: "",
+        };
+        firebase.initializeApp(config);
+    </script>
   <script src="/todo/js/jquery.js"></script>
   <script src="/todo/js/todo.js"></script> 
 <script type="text/javascript">
