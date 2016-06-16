@@ -145,20 +145,14 @@
     
     <script>
     /* global $ auth */
-    var authid;
     auth(function(user){
-        window.authid = user.uid;
-    }, function(){
-        window.location.href = "https://jeffreymeng.github.io/todo/login?redirect=" + encodeURIComponent(window.location.href);
-    });
-    
-    $(document).load(function(){
-        $("#loader").remove() 
-    });
+
         // show list
         var vars = window.location.pathname.split("/");
         var uid = vars[2]; // 0 and 1 are '' and 'todo'
         var listid = vars[3];
+        console.log(checkPermissions(uid, listid))
+        if (checkPermissions(uid, listid)) {
         getList(listid, uid);
         // check for actions
         var actions = window.location.hash;
@@ -167,6 +161,13 @@
                 deleteItem()
             }
         }
+        } else {
+            alert("permission denid")
+        }
+    }, function(){
+        window.location.href = "https://jeffreymeng.github.io/todo/login?redirect=" + encodeURIComponent(window.location.href);
+    });
+
 
     </script>
 
