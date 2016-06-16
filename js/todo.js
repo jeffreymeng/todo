@@ -119,7 +119,7 @@ function addItem(id, name, description, deadline) {
 	$("#items").append(toappend);
 }
 function checkPermissions(uid, listuid, listid, callback) {
-		var ref = firebase.database().ref('users/' + uid + '/lists/' + listid);
+		var ref = firebase.database().ref('users/' + listuid + '/lists/' + listid);
 	ref.once('value', function(d) {
 		var data = d.val();
 		console.log(data);
