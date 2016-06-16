@@ -139,14 +139,22 @@
 						if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-email") {
 							$("#confirm-password").val("");
 							$("#password").val("");
-							$("#error").html("The email/password combo was incorrect. Note that both fields are case sensitive. If you don't have an account, <a class='login'>instead</a>.");
-							$(".login").click(function() {
-								$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
-								$("#title").html("Login");
+							$("#error").html("The email/password combo was incorrect. Note that both fields are case sensitive. If you don't have an account, <a class='signup'>sign up</a>.");
+							$(".sign-up #sign-up").click(function() {
+								$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
+								$(".login").click(function() {
+									$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+									$("#title").html("Login");
+									$("#password").val("");
+									$("#confirm-password-div").css("display", "none");
+									$("#login-btn").attr("value", "Login");
+									window.login = "login";
+								});
+								$("#title").html("Sign Up");
 								$("#password").val("");
-								$("#confirm-password-div").css("display", "none");
-								$("#login-btn").attr("value", "Login");
-								window.login = "login";
+								$("#confirm-password-div").css("display", "block");
+								$("#login-btn").attr("value", "Sign Up");
+								window.login = "signup";
 							});
 						}
 						else {
