@@ -10,7 +10,9 @@ $("#info-delete-list").click(function(){
 	$("#confirm-enter-name").keyup(function(){
 		if ($("#confirm-enter-name").val() === $("#confirm-enter-name").attr("data-correct-value")) {
 			$("#confirm-delete-button").removeClass("disabled")
-		}	
+		} else {
+			$("#confirm-delete-button").addClass("disabled")
+		}
 	});
 });
 $("a.hovertrigger").hover(
