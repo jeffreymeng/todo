@@ -31,9 +31,7 @@ function auth(onAuthed, onUnauthed) {
 
 }
 function createTodo(name, uid) {
-	// TESTING ONLY!!!
-	var uid = uid || "3409faojsniou309ofha393";
-	//Testing Only!!!
+
 	// A post entry.
 	var postData = {
 		shared: false,
@@ -54,7 +52,7 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id + '/items')
 	// Write the new post's data simultaneously in the posts list and the user's post list.
 	var data = {
-		title:name,
+		name:name,
 		description:description,
 		deadline:deadline,
 		priority:priority
@@ -63,13 +61,8 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 	return ref.push(data);
 
 }
-function getItemsFromFirebase(uid, listid) {
-firebase.database().ref('/users/' + uid + "/lists/" + listid + "/items/" + itemid).on('child_added').then(function(snapshot) {
-  var data = snapshot.val();
-  console.log(data);
-});
 
-}
+
 function getList(id, uid) {
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
@@ -78,12 +71,13 @@ function getList(id, uid) {
 		var data = d.val();
 		console.log(data);
 		
-		$("#list-title").html(data.title);
+		$("#list-title").html(data.name);
 	});
 	
 	childRef.on('child_added', function(d) {
 		var data = d.val();
 		console.log(data);
+		
 		addItem(d.key, data.name, data.description, data.deadline);
 		
 	});
@@ -93,14 +87,14 @@ function addItem(id, name, description, deadline) {
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
 		        '<input id="checkbox' + id + '" class="styled" type="checkbox">' + 
-		        '<label for="checkbox' + id + '">' + name + '</label>' + 
+		        '<label for="checkbox' + id + '" class="strikethrough">' + name + '</label>' + 
 		        '<a class="more-info" data-toggle="collapse" href="#item-' + id + '-info" aria-expanded="false" aria-controls="item-' + id + '-info">' + 
 		            '<i class="fa fa-caret-down"></i>' + 
 		        '</a>' + 
 		    '</div>' + 
 		    '<div class="collapse" id="item-' + id + '-info">' + 
 		        '<p>' + description + '</p>' + 
-		        '<p><b>Deadline:</b> ' + deadline + '</p>'
+		        '<p><b>Deadline:</b> ' + deadline + '</p>' + 
 		    '</div>' + 
         '</div>';
 	$("#items").append(toappend);
