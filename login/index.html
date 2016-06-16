@@ -73,7 +73,7 @@
       window.login = "signup";
     });
     
-    $("#login-button").click(function() {
+    $("#login-btn").click(function() {
       if (window.login === "signup") {
         if ($("#password").val() === $("#confirm-password").val()) {
         var createuser = firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
@@ -92,7 +92,7 @@
           }
           console.log(user);
 
-  console.loog(error);
+  console.log(createuser);
 });
 } else {
   $("#confirm-password").val("");
@@ -105,7 +105,7 @@
 
           console.log(error);
         });
-        console.log(user);
+        console.log(loginuser);
       }
     });
 
