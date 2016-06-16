@@ -16,19 +16,19 @@
     <title>Todo App - Jeffrey Meng</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Font Awesome Checkboxes (https://github.com/flatlogic/awesome-bootstrap-checkbox) -->
-    <link href="css/checkboxes.css" rel="stylesheet">
+    <link href="/css/checkboxes.css" rel="stylesheet">
      <!-- Datepicker CSS -->
-    <link href="css/datepicker.css" rel="stylesheet">
+    <link href="/css/datepicker.css" rel="stylesheet">
     <!-- todo custom css -->
-    <link href="css/todo.css" rel="stylesheet">
+    <link href="/css/todo.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -118,10 +118,10 @@
   </div>
 </div>
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
@@ -145,13 +145,17 @@
         getList(uid, listid);
         // check for actions
         var actions = window.location.hash;
-        if (actions !== null && actions !== "" && actions !=="#" && actions !==" ")
+        if (actions !== null && actions !== "" && actions !=="#" && actions !==" ") {
+            if (action === "delete") {
+                
+            }
+        }
 
     </script>
     <!-- Datepicker Javascript -->
-    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->
-    <script src="js/todo.js"></script>
+    <script src="/js/todo.js"></script>
     
     
 
