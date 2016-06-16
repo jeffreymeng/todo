@@ -63,14 +63,11 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 	return ref.push(data);
 
 }
-function getItemFromFirebase(uid, listid, itemid) {
-	var x = null;
-firebase.database().ref('/users/' + uid + "/lists/" + listid + "/items/" + itemid).once('value').then(function(snapshot) {
+function getItemsFromFirebase(uid, listid) {
+firebase.database().ref('/users/' + uid + "/lists/" + listid + "/items/" + itemid).on('child_added').then(function(snapshot) {
   var data = snapshot.val();
   console.log(data);
-  x = data;
 });
-return x;
 
 }
 function getList(id, uid) {
