@@ -146,8 +146,8 @@
     <script>
         // show list
         var vars = window.location.pathname.split("/");
-        var uid = vars[0];
-        var listid = vars[1];
+        var uid = vars[2]; // 0 and 1 are '' and 'todo'
+        var listid = vars[3];
         getList(listid, uid);
         // check for actions
         var actions = window.location.hash;
