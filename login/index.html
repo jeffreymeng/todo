@@ -13,22 +13,22 @@
 </head>
 
 <body>
-  <div class="form-box">
+  <div class="login-form-box">
     <div class="head" id="title">Login</div>
     <div id="login-form">
-      <div class="form-group">
+      <div class="login-form-group">
         <label class="label-control">
             <span class="label-text">Email</span>
           </label>
         <input type="email" name="email" class="login-form-control" />
       </div>
-      <div class="form-group">
+      <div class="login-form-group">
         <label class="label-control">
             <span class="label-text">Password</span>
           </label>
         <input type="password" name="password" class="login-form-control" />
       </div>
-      <div class="form-group" id="confirm-password-div" style="display:none;">
+      <div class="login-form-group" id="confirm-password-div" style="display:none;">
         <label class="label-control">
             <span class="label-text">Confirm Password</span>
           </label>
@@ -75,18 +75,30 @@
     
     $("#login-button").click(function() {
       if (window.login === "signup") {
+        if ($("#password").val() === $("#confirm-password").val()) {
         var createuser = firebase.auth().createUserWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
           if (error.code === "auth/email-already-in-use") {
+              $("#confirm-password").val("");
+  $("#password").val("");
             $("#error").html("Your email is already registerd. <a href='/todo/login/'>Login</a> instead.");
           } else if (error.code === "auth/invalid-email") {
+              $("#confirm-password").val("");
+  $("#password").val("");
             $("#error").html("The email you enterd is not vaid. Please try again.");
           } else if (error.code === "auth/weak-password") {
+              $("#confirm-password").val("");
+  $("#password").val("");
             $("#error").html("The password you enterd is too weak. Try adding at least one captial letter, one lowercase letter, and one number, or making it longer.");
           }
           console.log(user);
 
   console.loog(error);
 });
+} else {
+  $("#confirm-password").val("");
+  $("#password").val("");
+  $("#error").val("The two passwords you enter don't match!");
+}
       }
       else {
         var loginuser = firebase.auth().signInWithEmailAndPassword($("#email").val(), $("#password").val()).catch(function(error) {
