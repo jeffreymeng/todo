@@ -85,8 +85,7 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 
 
 function getList(id, uid) {
-	data.currentId = id;
-	
+
 	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
@@ -94,7 +93,6 @@ function getList(id, uid) {
 	ref.once('value', function(d) {
 		var data = d.val();
 		console.log(data);
-		data.currentListName = data.name;
 		$("#list-title").html(data.name);
 	});
 	
