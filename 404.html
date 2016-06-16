@@ -144,6 +144,14 @@
     <script src="/todo/js/todo.js"></script>
     
     <script>
+    /* global $ auth */
+    var authid;
+    auth(function(user){
+        window.authid = user.uid;
+    }, function(){
+        window.location.href = "https://jeffreymeng.github.io/todo/login?redirect=" + encodeURIComponent(window.location.href);
+    });
+    
     $(document).load(function(){
         $("#loader").remove() 
     });

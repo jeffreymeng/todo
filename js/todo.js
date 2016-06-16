@@ -118,3 +118,26 @@ function addItem(id, name, description, deadline) {
         '</div>';
 	$("#items").append(toappend);
 }
+function checkPermissions(uid, listid) {
+	window.permissionsreturn = null;
+		var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
+	ref.once('value', function(d) {
+		var data = d.val();
+		console.log(data.sharing);
+		var sharing = data.sharing;
+		if (sharing === "private") {
+			window.permissionsreturn = false;
+		} else if (sharing === "limited"){
+			if ($.inArray(uid, data.sharedWith)) {
+				window.permissionsreturn = true;
+			} else {
+				window.permissionsreturn = false;
+			}
+			
+		} else if (sharing === "public") {
+			window.permissionsreturn = true;
+		}
+	});
+	return window.permissionsreturn;
+
+}
