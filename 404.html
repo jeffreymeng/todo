@@ -143,6 +143,9 @@
         var uid = vars[0];
         var listid = vars[1];
         getList(uid, listid);
+        // check for actions
+        var actions = window.location.hash;
+        if (actions !== null && actions !== "" && actions !=="#" && actions !==" ")
 
     </script>
     <!-- Datepicker Javascript -->

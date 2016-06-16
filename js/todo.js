@@ -8,13 +8,11 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 var data = {
 	currentListName:"undefined",
 	currentId:undefined
 };
-var database = firebase.database();
-$("#info-delete-list").click(function(){
+function deleteItem() {
 	$("#confirm-enter-name").attr("data-correct-value", data.currentListName);
 	$('#confirm-delete').modal("show");
 	$("#confirm-enter-name").keyup(function(){
@@ -24,7 +22,11 @@ $("#info-delete-list").click(function(){
 			$("#confirm-delete-button").addClass("disabled")
 		}
 	});
-});
+
+}
+
+var database = firebase.database();
+$("#info-delete-list").click(deleteItem);
 $("a.hovertrigger").hover(
 	function() {
 		$(this).append($("<span><i class='fa fa-times' onclick='delete(" + $(this).attr("data-todo-id") + ")'></i></span>"));
