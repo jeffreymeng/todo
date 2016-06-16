@@ -120,7 +120,7 @@ function addItem(id, name, description, deadline) {
 }
 function checkPermissions(uid, listid) {
 	window.permissionsreturn = null;
-		var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
+		var ref = firebase.database().ref('users/' + uid + '/lists/' + listid);
 	ref.once('value', function(d) {
 		var data = d.val();
 		console.log(data.sharing);
