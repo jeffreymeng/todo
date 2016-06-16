@@ -148,7 +148,7 @@
         var vars = window.location.pathname.split("/");
         var uid = vars[0];
         var listid = vars[1];
-        getList(uid, listid);
+        getList(listid, uid);
         // check for actions
         var actions = window.location.hash;
         if (actions !== null && actions !== "" && actions !=="#" && actions !==" ") {
