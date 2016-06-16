@@ -122,8 +122,6 @@ function checkPermissions(uid, listuid, listid, callback) {
 		var ref = firebase.database().ref('users/' + listuid + '/lists/' + listid);
 	ref.once('value', function(d) {
 		var data = d.val();
-		console.log(data);
-		console.log(data.sharing);
 		var sharing = data.sharing;
 		if (sharing === "private") {
 			callback(false);
