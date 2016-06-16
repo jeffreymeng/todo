@@ -8,15 +8,13 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-var data = {
-	currentListName:"undefined",
-	currentId:undefined
-};
+
+
 function deleteItem() {
-	$("#confirm-enter-name").attr("data-correct-value", data.currentListName);
+	$("#confirm-enter-name").attr("data-correct-value");
 	$('#confirm-delete').modal("show");
 	$("#confirm-enter-name").keyup(function(){
-		if ($("#confirm-enter-name").val() === $("#confirm-enter-name").attr("data-correct-value")) {
+		if ($("#confirm-enter-name").val().toLowerCase() === $("#list-title").html().toLowerCase()) {
 			$("#confirm-delete-button").removeClass("disabled")
 		} else {
 			$("#confirm-delete-button").addClass("disabled")
