@@ -128,7 +128,7 @@ function checkPermissions(uid, listuid, listid, callback) {
 		if (sharing === "private") {
 			callback(false);
 		} else if (sharing === "limited"){
-			if ($.inArray(uid, data.sharedWith)) {
+			if ($.inArray(uid, data.sharedWith) > -1) {
 				callback(true);
 			} else {
 				callback(false);
