@@ -39,10 +39,8 @@ function auth(onAuthed, onUnauthed) {
 
     firebase.auth().onAuthStateChanged(function(user) {
 
-		if (onAuthed === null) {
-			console.log(user);
-		} else if (user) {
-            onAuthed();
+		if (user) {
+            onAuthed(user);
         } else {
             onUnauthed();
         }
