@@ -2,7 +2,7 @@
 
 var database = firebase.database();
 $("#info-delete-list").click(function(){
-	$('#confirm-delete').modal("open")
+	$('#confirm-delete').modal("show")
 });
 $("a.hovertrigger").hover(
 	function() {
