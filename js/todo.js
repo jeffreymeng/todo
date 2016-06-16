@@ -86,8 +86,8 @@ function addItem(id, name, description, deadline) {
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
-		        '<input id="checkbox' + id + '" class="styled" type="checkbox">' + 
-		        '<label for="checkbox' + id + '" class="strikethrough">' + name + '</label>' + 
+		        '<input id="checkbox' + id + '" class="styled strikethrough" type="checkbox">' + 
+		        '<label for="checkbox' + id + '" >' + name + '</label>' + 
 		        '<a class="more-info" data-toggle="collapse" href="#item-' + id + '-info" aria-expanded="false" aria-controls="item-' + id + '-info">' + 
 		            '<i class="fa fa-caret-down"></i>' + 
 		        '</a>' + 
