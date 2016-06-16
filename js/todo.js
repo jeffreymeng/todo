@@ -1,7 +1,9 @@
 /* global $ firebase*/
 
 var database = firebase.database();
-
+$("#info-delete-list").click(function(){
+	$('#confirm-delete').modal("open")
+});
 $("a.hovertrigger").hover(
 	function() {
 		$(this).append($("<span><i class='fa fa-times' onclick='delete(" + $(this).attr("data-todo-id") + ")'></i></span>"));
