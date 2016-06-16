@@ -36,12 +36,10 @@ $("a.hovertrigger").hover(
 );
 // Checks if the user is logged in
 function auth(onAuthed, onUnauthed) {
-    onAuthed = onAuthed || function() {};
-    onUnauthed = onUnauthed || function() {};
-    
+
     firebase.auth().onAuthStateChanged(function(user) {
 
-		if (onAuuthed === null) {
+		if (onAuthed === null) {
 			return true ? user !== null : false;
 		} else if (user) {
             onAuthed();
