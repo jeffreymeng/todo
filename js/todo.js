@@ -118,26 +118,25 @@ function addItem(id, name, description, deadline) {
         '</div>';
 	$("#items").append(toappend);
 }
-function checkPermissions(uid, listuid, listid) {
-	window.permissionsreturn = null;
+function checkPermissions(uid, listuid, listid, callback) {
 		var ref = firebase.database().ref('users/' + uid + '/lists/' + listid);
 	ref.once('value', function(d) {
 		var data = d.val();
 		console.log(data.sharing);
 		var sharing = data.sharing;
 		if (sharing === "private") {
-			window.permissionsreturn = false;
+			callback(false);
 		} else if (sharing === "limited"){
 			if ($.inArray(uid, data.sharedWith)) {
-				window.permissionsreturn = true;
+				callback(true);
 			} else {
-				window.permissionsreturn = false;
+				callback(false);
 			}
 			
 		} else if (sharing === "public") {
-			window.permissionsreturn = true;
+			callback(true);
 		}
 	});
-	return window.permissionsreturn;
+
 
 }

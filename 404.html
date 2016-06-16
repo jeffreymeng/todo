@@ -20,12 +20,12 @@
 
     <!-- Custom CSS -->
     <link href="/todo/css/simple-sidebar.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link href="/todo/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Font Awesome Checkboxes (https://github.com/flatlogic/awesome-bootstrap-checkbox) -->
     <link href="/todo/css/checkboxes.css" rel="stylesheet">
-     <!-- Datepicker CSS -->
+    <!-- Datepicker CSS -->
     <link href="/todo/css/datepicker.css" rel="stylesheet">
     <!-- todo custom css -->
     <link href="/todo/css/todo.css" rel="stylesheet">
@@ -73,19 +73,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 id="list-title">Loading</h1>
-                        <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span> | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
+                        <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span>                            | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
                         <hr>
-                            <input class="form-control" type="text" id="item" placeholder="add an item">
+                        <input class="form-control" type="text" id="item" placeholder="add an item">
                         <div id="add-item" class="collapse">
                             <label for="details">Details/Description</label>
                             <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do."></textarea>
                             <label for="deadline">Deadline:</label>
-                              <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
-                              <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>
-                              <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
+                            <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
+                            <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>
+                            <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
                         </div>
                         <div id="items">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -97,25 +97,25 @@
     <!-- /#wrapper -->
     <!-- modal -->
     <!-- Modal for deleting items -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" onclick="window.location.hash = '';" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="modal-title">Please Confirm</h4>
-      </div>
-      <div class="modal-body" id="modal-body">
-        <h6>Dangrous Things will happen if you don't pay attention!</h6>
-        <p class="test-danger">You are about to delete a list. In order to proceed, please type in the name of the list you are trying to delete.</p>
-        <input class="form-control" type="text" id="confirm-enter-name">
-        <button class="form-control btn btn-danger disabled" id="confirm-delete-button">Delete</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="window.location.hash = '';" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" onclick="window.location.hash = '';" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-title">Please Confirm</h4>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <h6>Dangrous Things will happen if you don't pay attention!</h6>
+                    <p class="test-danger">You are about to delete a list. In order to proceed, please type in the name of the list you are trying to delete.</p>
+                    <input class="form-control" type="text" id="confirm-enter-name">
+                    <button class="form-control btn btn-danger disabled" id="confirm-delete-button">Delete</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="window.location.hash = '';" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
     <!-- jQuery -->
     <script src="/todo/js/jquery.js"></script>
 
@@ -124,9 +124,11 @@
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
-    /* global firebase $ */
-        $("#item").click(function(){$('#add-item').collapse("show");});
-        
+        /* global firebase $ */
+        $("#item").click(function() {
+            $('#add-item').collapse("show");
+        });
+
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
@@ -142,33 +144,34 @@
     <script src="/todo/js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->
     <script src="/todo/js/todo.js"></script>
-    
+
     <script>
-    /* global $ auth */
-    auth(function(user){
+        /* global $ auth getList deleteItem checkPermissions */
+        auth(function(user) {
 
-        // show list
-        var vars = window.location.pathname.split("/");
-        var uid = vars[2]; // 0 and 1 are '' and 'todo'
-        var listid = vars[3];
-        console.log(checkPermissions(user.uid, uid, listid))
-        if (checkPermissions(uid, listid)) {
-        getList(listid, uid);
-        // check for actions
-        var actions = window.location.hash;
-        if (actions !== null && actions !== "" && actions !=="#" && actions !==" ") {
-            if (actions === "#delete") {
-                deleteItem()
-            }
-        }
-        } else {
-            alert("permission denid")
-        }
-    }, function(){
-        window.location.href = "https://jeffreymeng.github.io/todo/login?redirect=" + encodeURIComponent(window.location.href);
-    });
+            // show list
+            var vars = window.location.pathname.split("/");
+            var uid = vars[2]; // 0 and 1 are '' and 'todo'
+            var listid = vars[3];
+            checkPermissions(user.uid, uid, listid, function(permission) {
+                if (permission === true) {
+                    getList(listid, uid);
+                    // check for actions
+                    var actions = window.location.hash;
+                    if (actions !== null && actions !== "" && actions !== "#" && actions !== " ") {
+                        if (actions === "#delete") {
+                            deleteItem();
+                        }
+                    }
+                }
+                else {
+                    alert("permission denid");
+                }
+            });
 
-
+        }, function() {
+            window.location.href = "https://jeffreymeng.github.io/todo/login?redirect=" + encodeURIComponent(window.location.href);
+        });
     </script>
 
 
