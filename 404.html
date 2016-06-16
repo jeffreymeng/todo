@@ -151,7 +151,7 @@
         var vars = window.location.pathname.split("/");
         var uid = vars[2]; // 0 and 1 are '' and 'todo'
         var listid = vars[3];
-        console.log(checkPermissions(uid, listid))
+        console.log(checkPermissions(user.uid, uid, listid))
         if (checkPermissions(uid, listid)) {
         getList(listid, uid);
         // check for actions
