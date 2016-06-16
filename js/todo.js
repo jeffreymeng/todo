@@ -1,8 +1,17 @@
 /* global $ firebase*/
-
+var data = {
+	currentListName:"undefined",
+	currentId:undefined
+};
 var database = firebase.database();
 $("#info-delete-list").click(function(){
-	$('#confirm-delete').modal("show")
+	$("#confirm-enter-name").attr("data-correct-value", data.currentListName);
+	$('#confirm-delete').modal("show");
+	$("#confirm-enter-name").keyup(function(){
+		if ($("#confirm-enter-name").val() === $("#confirm-enter-name").attr("data-correct-value")) {
+			$("#confirm-delete-button").removeClass("disabled")
+		}	
+	});
 });
 $("a.hovertrigger").hover(
 	function() {
@@ -18,10 +27,8 @@ function auth(onAuthed, onUnauthed) {
     onUnauthed = onUnauthed || function() {};
     
     firebase.auth().onAuthStateChanged(function(user) {
-// USE IN EMERGENCY ONLY
-// user = true;
-// USE IN EMERGENCY ONLY
-		if (onUnuthed === null) {
+
+		if (onAuuthed === null) {
 			return true ? user !== null : false;
 		} else if (user) {
             onAuthed();
@@ -66,13 +73,16 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 
 
 function getList(id, uid) {
+	data.currentId = id;
+	
+	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
 	$("#lists").html("");
 	ref.once('value', function(d) {
 		var data = d.val();
 		console.log(data);
-		
+		data.currentListName = data.name;
 		$("#list-title").html(data.name);
 	});
 	
