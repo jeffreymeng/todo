@@ -98,7 +98,7 @@
     <!-- /#wrapper -->
     <!-- modal -->
     <!-- Modal for deleting items -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" onclick="window.location.hash = '';" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -112,7 +112,7 @@
         <button class="form-control btn btn-danger disabled" id="confirm-delete-button">Delete</button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" onclick="window.location.hash = '';" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -137,7 +137,8 @@
         };
         firebase.initializeApp(config);
     </script>
-    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <!-- Datepicker Javascript -->
     <script src="/todo/js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->

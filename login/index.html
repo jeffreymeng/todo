@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!--=======Font Open Sans======-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--=======Custom Style======-->
+    <link rel="stylesheet" href="/todo/css/login.css">
+
+  </head>
+  <body>
+  <div class="form-box">
+    <div class="head" id="title">Welcome Back</div>        
+    <div id="login-form">
+        <div class="form-group">
+          <label class="label-control">
+            <span class="label-text">Email</span>
+          </label>
+          <input type="email" name="email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label class="label-control">
+            <span class="label-text">Password</span>
+          </label> 
+          <input type="password" name="password" class="form-control" />
+        </div>
+        <input type="button" value="Login" class="btn" />
+        
+        <input type="button" value="googlelogin" class="btn" />
+        <p class="text-p">Don't have an account? <a id="sign-up">Sign up</a> </p>
+    </div>
+  </div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script src="/todo/js/jquery.min.js"></script>
+  <script src="/todo/js/todo.min.js"></script> 
+<script type="text/javascript">
+$(window).load(function(){
+  $('.form-group input').on('focus blur', function (e) {
+      $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
+  }).trigger('blur');
+});
+
+</script>
+<script>
+        
+        var email;
+        var password;
+        
+        
+        gapi.signin2.render('sign-in', {
+            'scope': 'email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': function (googleUser) {
+                email = googleUser.getBasicProfile().getEmail();
+                // change password generation method?
+                password = window.btoa(email);
+                
+                // console.log('email: ' + email + ' password: ' + password);
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
+                    // Login succeeded
+                    $.get('members', function(response) {
+                        if (response !== null) {
+                            var members = response.split('\n');
+                            
+                            window.location.href=getQuery("redirect")
+                        }
+                    });
+                }).catch(function(error) {
+                    console.error(error.message);
+                });
+            },
+            'onfailure': function (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
+
+               

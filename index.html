@@ -69,7 +69,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 id="list-title">Shopping List</h1>
+                        <h1 id="list-title">Loading...</h1>
                         <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span> | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
                         <hr>
                             <input class="form-control" type="text" id="item" placeholder="add an item">
@@ -98,7 +98,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" onclick="window.location.hash = ''" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="modal-title">Please Confirm</h4>
       </div>
       <div class="modal-body" id="modal-body">
@@ -133,6 +133,8 @@
         };
         firebase.initializeApp(config);
     </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <!-- Datepicker Javascript -->
     <script src="js/bootstrap-datepicker.js"></script>
     <!-- Todo Custom Javascript -->
