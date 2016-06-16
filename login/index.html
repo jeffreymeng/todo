@@ -65,9 +65,18 @@
   </script>
   <script>
     /* global firebase $ */
-    $("#sign-up").click(function() {
-      $(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.")
+    $(".sign-up #sign-up").click(function() {
+      $(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
+      $(".login").click(function(){
+              $(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+      $("#title").html("Login");
+      $("#password").val("");
+      $("#confirm-password-div").css("display", "none");
+      $("#login-btn").attr("value", "Login");
+      window.login = "login";
+            });
       $("#title").html("Sign Up");
+      $("#password").val("");
       $("#confirm-password-div").css("display", "block");
       $("#login-btn").attr("value", "Sign Up");
       window.login = "signup";
@@ -80,15 +89,24 @@
           if (error.code === "auth/email-already-in-use") {
               $("#confirm-password").val("");
   $("#password").val("");
-            $("#error").html("Your email is already registerd. <a href='/todo/login/'>Login</a> instead.");
+            $("#error").html("Your email is already registerd. <a clas='login'>Login</a> instead.");
+            
+            $(".login").click(function(){
+              $(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+      $("#title").html("Login");
+      $("#password").val("");
+      $("#confirm-password-div").css("display", "none");
+      $("#login-btn").attr("value", "Login");
+      window.login = "login";
+            });
           } else if (error.code === "auth/invalid-email") {
               $("#confirm-password").val("");
   $("#password").val("");
-            $("#error").html("The email you enterd is not vaid. Please try again.");
+            $("#error").html("The email you entered is not vaid. Please try again.");
           } else if (error.code === "auth/weak-password") {
               $("#confirm-password").val("");
   $("#password").val("");
-            $("#error").html("The password you enterd is too weak. Try adding at least one captial letter, one lowercase letter, and one number, or making it longer.");
+            $("#error").html("The password you entered is too weak. Try adding at least one captial letter, one lowercase letter, and one number, or making it longer.");
           }
           console.log(user);
 
@@ -97,7 +115,7 @@
 } else {
   $("#confirm-password").val("");
   $("#password").val("");
-  $("#error").val("The two passwords you enter don't match!");
+  $("#error").html("The two passwords you entered don't match!");
 }
       }
       else {
