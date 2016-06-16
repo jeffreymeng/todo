@@ -1,0 +1,158 @@
+<!-- url: https://jeffreymeng.github.io/todo/userid/listid
+    Delete: https://jeffreymeng.github.io/todo/userid/listid#delete
+    Other Action: https://jeffreymeng.github.io/todo/userid/listid#action-name
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create, Edit, and share todo lists easily!">
+    <meta name="author" content="Jeffrey Meng">
+
+    <title>Todo App - Jeffrey Meng</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font Awesome Checkboxes (https://github.com/flatlogic/awesome-bootstrap-checkbox) -->
+    <link href="css/checkboxes.css" rel="stylesheet">
+     <!-- Datepicker CSS -->
+    <link href="css/datepicker.css" rel="stylesheet">
+    <!-- todo custom css -->
+    <link href="css/todo.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        TODO
+                    </a>
+                </li>
+                <li>
+                    <span>My Favorite Lists</span>
+                </li>
+                <li>
+                    <a href="#search">View All Lists</a>
+                </li>
+                <li>
+                    <a href="#" class="hovertrigger">Test List number 1</a>
+                </li>
+                <li>
+                    <a href="#" class="hovertrigger">Test List number 2</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 id="list-title">Shopping List</h1>
+                        <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span> | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
+                        <hr>
+                            <input class="form-control" type="text" id="item" placeholder="add an item">
+                        <div id="add-item" class="collapse">
+                            <label for="details">Details/Description</label>
+                            <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do."></textarea>
+                            <label for="deadline">Deadline:</label>
+                              <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
+                              <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>
+                              <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
+                        </div>
+                        <div id="items">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- modal -->
+    <!-- Modal for deleting items -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-title">Please Confirm</h4>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <h6>Dangrous Things will happen if you don't pay attention!</h6>
+        <p class="test-danger">You are about to delete a list. In order to proceed, please type in the name of the list you are trying to delete.</p>
+        <input class="form-control" type="text" id="confirm-enter-name">
+        <button class="form-control btn btn-danger disabled" id="confirm-delete-button">Delete</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+    /* global firebase $ */
+        $("#item").click(function(){$('#add-item').collapse("show");});
+        
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCRtURUA03dgYS6powwyzUeGgSjsyVJqJ0",
+            authDomain: "jeffreytodo.firebaseapp.com",
+            databaseURL: "https://jeffreytodo.firebaseio.com",
+            storageBucket: "",
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+        // show list
+        var vars = window.location.pathname.split("/");
+        var uid = vars[0];
+        var listid = vars[1];
+        getList(uid, listid);
+
+    </script>
+    <!-- Datepicker Javascript -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <!-- Todo Custom Javascript -->
+    <script src="js/todo.js"></script>
+    
+    
+
+
+</body>
+
+</html>
