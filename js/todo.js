@@ -115,7 +115,9 @@ function addItem(id, name, description, deadline) {
 		var deadlinewrapper = '';
 	}
 	console.log(description);
-	var description = description || '';
+	if (description === null) {
+		var description = "";
+	}
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
@@ -131,7 +133,7 @@ function addItem(id, name, description, deadline) {
 		    '</div>' + 
         '</div>';
        if (description === null && deadline === null) {
-       	var toappend = '' + 
+       	toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
 		        '<input id="checkbox-' + id + '" class="styled strikethrough item-checkbox" type="checkbox">' + 
