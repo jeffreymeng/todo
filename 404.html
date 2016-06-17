@@ -84,6 +84,7 @@
                             <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do.(optional)"></textarea>
                             <label for="deadline">Deadline:</label>
                             <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
+                            <p class="text-danger" id="error"></p>
                             <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>&nbsp;&nbsp;
                             <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
                         </div>
@@ -172,8 +173,12 @@
                         } else {
                             var deadline = $("#deadline").val();
                         }
+                        if ($("#item").val() === null || $("#item").val() === "") {
+                           $("#error").html("You must specify a name.");
+                        } else {
                         
-                            addItemToFirebase(uid, listid, $("#item").val(), description, deadline)
+                            addItemToFirebase(uid, listid, $("#item").val(), description, deadline);
+                        }
                         
                     })
                     $( "#items" ).on( "click", ".item-checkbox", function() {
