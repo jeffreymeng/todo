@@ -67,15 +67,13 @@ function createTodo(name, uid) {
 	return firebase.database().ref().update(updates);
 
 }
-function addItemToFirebase(uid, id, name, description, deadline, priority) {
+function addItemToFirebase(uid, id, name, description, deadline) {
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id + '/items')
 	// Write the new post's data simultaneously in the posts list and the user's post list.
 	var data = {
 		name:name,
 		description:description,
-		deadline:deadline,
-		priority:priority
-		
+		deadline:deadline
 	};
 	return ref.push(data);
 
@@ -86,8 +84,8 @@ function getList(id, uid, dataUid) {
 
 	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
-	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
-	var dataRef = firebase.database().ref('users/' + dataUid + '/data/' + id + '/items/').orderByChild('priority');
+	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items');
+	var dataRef = firebase.database().ref('users/' + dataUid + '/data/' + id + '/items/');
 	$("#lists").html("");
 	ref.once('value', function(d) {
 		var data = d.val();
@@ -111,6 +109,12 @@ function getList(id, uid, dataUid) {
 	});
 }
 function addItem(id, name, description, deadline) {
+	if (deadline !== null ) {
+	var deadlinewrapper = '<p><b>Deadline:</b> ' + deadline  + '</p>';
+	} else {
+		var deadlinewrapper = '';
+	}
+	var description = description || '';
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
@@ -121,10 +125,20 @@ function addItem(id, name, description, deadline) {
 		        '</a>' + 
 		    '</div>' + 
 		    '<div class="collapse" id="item-' + id + '-info">' + 
-		        '<p>' + description + '</p>' + 
-		        '<p><b>Deadline:</b> ' + deadline + '</p>' + 
+		        '<p>' +  + '</p>' + 
+		        deadlinewrapper + 
 		    '</div>' + 
         '</div>';
+       if (description === null && deadline === null) {
+       	var toappend = '' + 
+		'<hr><div id="item-' + id + '">' + 
+	        '<div class="checkbox checkbox-success">' + 
+		        '<input id="checkbox-' + id + '" class="styled strikethrough item-checkbox" type="checkbox">' + 
+		        '<label for="checkbox-' + id + '" >' + name + '</label>' + 
+		    '</div>' + 
+		    
+        '</div>';
+       }
 	$("#items").append(toappend);
 }
 function checkPermissions(uid, listuid, listid, callback) {

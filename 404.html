@@ -81,10 +81,10 @@
                         <input class="form-control" type="text" id="item" placeholder="add an item">
                         <div id="add-item" class="collapse">
                             <label for="details">Details/Description</label>
-                            <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do."></textarea>
+                            <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do.(optional)"></textarea>
                             <label for="deadline">Deadline:</label>
                             <input class="form-control datepicker" id="deadline" size="16" type="text" placeholder="Choode a Deadline(optional)">
-                            <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>
+                            <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>&nbsp;&nbsp;
                             <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
                         </div>
                         <div id="items">
@@ -161,6 +161,21 @@
                 var actions = window.location.hash;
                 if (permission === true && actions !== "#permission-denied") {
                     getList(listid, uid, user.uid);
+                    $("#add").click(function(){
+                        if ($("#details").val() === null || $("#details").val() === "") {
+                            var description = null;
+                        } else {
+                            var description = $("#details").val();
+                        }
+                        if ($("#deadline").val() === null || $("#deadline").val() === "") {
+                            var deadline = null;
+                        } else {
+                            var deadline = $("#deadline").val();
+                        }
+                        
+                            addItemToFirebase(uid, listid, $("#item").val(), description, deadline)
+                        
+                    })
                     $( "#items" ).on( "click", ".item-checkbox", function() {
                         var id = this.id;
                         //console.log(id);
