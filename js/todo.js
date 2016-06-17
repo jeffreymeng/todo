@@ -118,6 +118,9 @@ function addItem(id, name, description, deadline) {
 	if (description === null || description === undefined) {
 		description = "";
 	}
+	console.log(description === '' && deadline === '');
+	console.log(description)
+	console.log(deadline)
        if (description === '' && deadline === '') {
        	toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
