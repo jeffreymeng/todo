@@ -9,12 +9,15 @@
 	<!--=======Custom Style======-->
 	<link rel="stylesheet" href="/todo/css/login.css">
 	<link rel="stylesheet" href="/todo/css/bootstrap.min.css">
-
+	<style>
+		.hidden {
+			display:none;
+		}
+	</style>
 </head>
 
 <body>
-	<div class="alert alert-success" role="alert" id="logout">You were logged out successfully!</div>
-	<script>$("#logout").hide();</script>
+	<div class="alert alert-success hidden" role="alert" id="logout">You were logged out successfully!</div>
 	<div class="form-box">
 		<div class="head" id="title">Login</div>
 		<div id="login-form">
@@ -88,7 +91,7 @@
 			window.login = "signup";
 		} else if (window.location.hash === "#logout") {
 			firebase.auth().signOut().then(function() {
-  $("#logout").show();
+  $("#logout").removeClass("hidden");
 }, function(error) {
   // An error happened.
   console.log(error);
