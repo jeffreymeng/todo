@@ -73,8 +73,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 id="list-title">Loading</h1>
-                        <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span>
-                        | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
+                        <p id="info-bar">Created by <span id="info-creator" class="info">You</span> on <span id="info-created" class="info">6/5/16</span> | Last edited on <span id="info-last-edited" class="info">6/5/2016</span> | <span id="info-sharing" class="info">Private</span>                            | <span id="info-favorites" class="info"><a>Remove from Favorites</a></span> | <span id="info-delete-list" class="info"><a>Delete</a></span> | <span id="info-edit-info" class="info"><a>Edit Info</a></span></p>
                         <hr>
                         <input class="form-control" type="text" id="item" placeholder="add an item">
                         <div id="add-item" class="collapse">
@@ -117,7 +116,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- jQuery -->
     <script src="/todo/js/jquery.js"></script>
 
@@ -159,8 +158,14 @@
                 var actions = window.location.hash;
                 if (permission === true && actions !== "#permission-denied") {
                     getList(listid, uid, user.uid);
+                    $(".item-checkbox").click(function() {
+                        var id = this.id;
+                        firebase.database().ref('users/' + user.uid + "/data/" + listid + "/" + item.substring(5)).set({
+                            checked: $('#' + id).prop('checked'),
+                        });
+                    });
                     // check for actions
-                    
+
                     if (actions !== null && actions !== "" && actions !== "#" && actions !== " ") {
                         if (actions === "#delete") {
                             deleteItem();
