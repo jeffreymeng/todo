@@ -86,6 +86,7 @@ function getList(id, uid) {
 	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
+	var dataRef = firebase.database().ref('users/' + uid + '/data/' + id + '/items').orderByChild('priority');
 	$("#lists").html("");
 	ref.once('value', function(d) {
 		var data = d.val();
@@ -100,13 +101,18 @@ function getList(id, uid) {
 		addItem(d.key, data.name, data.description, data.deadline);
 		
 	});
+	dataRef.on('child_added', function(d) {
+		var data = d.val();
+		$("#checkbox-" + d.key).prop("checked", data.ckecked);
+		
+	});
 }
 function addItem(id, name, description, deadline) {
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
-		        '<input id="checkbox' + id + '" class="styled strikethrough" type="checkbox">' + 
-		        '<label for="checkbox' + id + '" >' + name + '</label>' + 
+		        '<input id="checkbox-' + id + '" class="styled strikethrough" type="checkbox">' + 
+		        '<label for="checkbox-' + id + '" >' + name + '</label>' + 
 		        '<a class="more-info" data-toggle="collapse" href="#item-' + id + '-info" aria-expanded="false" aria-controls="item-' + id + '-info">' + 
 		            '<i class="fa fa-caret-down"></i>' + 
 		        '</a>' + 
