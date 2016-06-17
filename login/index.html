@@ -13,6 +13,7 @@
 </head>
 
 <body>
+	<div class="alert alert-success" role="alert">You were logged out successfully!</div>
 	<div class="form-box">
 		<div class="head" id="title">Login</div>
 		<div id="login-form">
@@ -69,7 +70,28 @@
 		auth(function(user) {
 			window.location.href = getQuery("redirect") || "/todo";
 		});
-
+		if (window.location.hash === "#signup") {
+			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
+			$(".login").click(function() {
+				$(".text-p").html("Don't have an account? <a class='signup'>Signup</a>.");
+				$("#title").html("Login");
+				$("#password").val("");
+				$("#confirm-password-div").css("display", "none");
+				$("#login-btn").attr("value", "Login");
+				window.login = "login";
+			});
+			$("#title").html("Sign Up");
+			$("#password").val("");
+			$("#confirm-password-div").css("display", "block");
+			$("#login-btn").attr("value", "Sign Up");
+			window.login = "signup";
+		} else if (window.location.hash === "#logout") {
+			firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}, function(error) {
+  // An error happened.
+});
+		}
 		$(".sign-up #sign-up").click(function() {
 			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
 			$(".login").click(function() {
