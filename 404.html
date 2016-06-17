@@ -158,7 +158,7 @@
             checkPermissions(user.uid, uid, listid, function(permission) {
                 var actions = window.location.hash;
                 if (permission === true && actions !== "#permission-denied") {
-                    getList(listid, uid);
+                    getList(listid, uid, user.uid);
                     // check for actions
                     
                     if (actions !== null && actions !== "" && actions !== "#" && actions !== " ") {
