@@ -70,10 +70,19 @@
 	</script>
 	<script>
 		/* global firebase $ auth getQuery */
-
-		auth(function(user) {
-			window.location.href = getQuery("redirect") || "/todo";
-		});
+		if (window.location.hash === "#logout") {
+			firebase.auth().signOut().then(function() {
+				$("#logout").removeClass("hidden");
+			}, function(error) {
+				// An error happened.
+				console.log(error);
+			});
+		}
+		else {
+			auth(function(user) {
+				window.location.href = getQuery("redirect") || "/todo";
+			});
+		}
 		if (window.location.hash === "#signup") {
 			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
 			$(".login").click(function() {
@@ -90,14 +99,7 @@
 			$("#login-btn").attr("value", "Sign Up");
 			window.login = "signup";
 		}
-		else if (window.location.hash === "#logout") {
-			firebase.auth().signOut().then(function() {
-				$("#logout").removeClass("hidden");
-			}, function(error) {
-				// An error happened.
-				console.log(error);
-			});
-		}
+
 		$(".sign-up #sign-up").click(function() {
 			$(".text-p").html("Already have an account? <a href='/todo/login/'>Login</a> instead.");
 			$(".login").click(function() {
