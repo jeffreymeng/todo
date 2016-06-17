@@ -160,7 +160,10 @@
                     getList(listid, uid, user.uid);
                     $(".item-checkbox").click(function() {
                         var id = this.id;
-                        firebase.database().ref('users/' + user.uid + "/data/" + listid + "/" + item.substring(5)).set({
+                        console.log(id);
+                        console.log(user.uid);
+                        console.log(listid);
+                        firebase.database().ref('users/' + user.uid + "/data/" + listid + "/" + id.substring(5)).set({
                             checked: $('#' + id).prop('checked'),
                         });
                     });
