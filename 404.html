@@ -163,7 +163,7 @@
                         console.log(id);
                         console.log(user.uid);
                         console.log(listid);
-                        firebase.database().ref('users/' + user.uid + "/data/" + listid + "/" + id.substring(5)).set({
+                        firebase.database().ref('users/' + user.uid + "/data/" + listid + "/" + id.substring(9)).set({
                             checked: $('#' + id).prop('checked'),
                         });
                     });
