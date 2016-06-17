@@ -105,7 +105,7 @@ function getList(id, uid, dataUid) {
 		var data = d.val();
 		console.log(data);
 		console.log("#checkbox-" + d.key);
-		$("#checkbox-" + d.key).prop("checked", data.ckecked);
+		$("#checkbox-" + d.key).prop("checked", data.checked);
 		
 	});
 }
