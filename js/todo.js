@@ -79,7 +79,12 @@ function addItemToFirebase(uid, id, name, description, deadline) {
 
 }
 
-
+function randomString(length) {
+var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+}
 function getList(id, uid, dataUid) {
 
 	
@@ -149,22 +154,22 @@ function addItem(id, name, description, deadline) {
        }
 	$("#items").append(toappend);
 }
-function checkPermissions(uid, listuid, listid, callback) {
+function checkPermissions(uid, listuid, listid, link, callback) {
 		var ref = firebase.database().ref('users/' + listuid + '/lists/' + listid);
 	ref.once('value', function(d) {
 		var data = d.val();
 		var sharing = data.sharing;
 		if (sharing === "private") {
 			callback(false);
-		} else if (sharing === "limited"){
-			if ($.inArray(uid, data.sharedWith) > -1) {
-				callback(true);
+		} else if (sharing === "link"){
+			if (data.shareSettings[link].type === "no-password") {
+				callback(true, data.shareSettings[link]);
+			} else if (data.shareSettings[link].type === "password") {
+				callback(true, data.shareSettings[link]);
 			} else {
 				callback(false);
 			}
 			
-		} else if (sharing === "public") {
-			callback(true);
 		}
 	});
 

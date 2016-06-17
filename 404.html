@@ -158,7 +158,8 @@
             var vars = window.location.pathname.split("/");
             var uid = vars[2]; // 0 and 1 are '' and 'todo'
             var listid = vars[3];
-            checkPermissions(user.uid, uid, listid, function(permission) {
+            var shareLink = vars[4];
+            checkPermissions(user.uid, uid, listid, shareLink,  function(permission) {
                 var actions = window.location.hash;
                 if (permission === true && actions !== "#permission-denied") {
                     getList(listid, uid, user.uid);
@@ -199,10 +200,23 @@
                     }
                 }
                 else {
-                    $("#list-title").html("Permission Denied");
+                    $("#list-title").html("Password Required");
                     $("#info-bar").hide();
                     $("#item").hide();
-                    $("#items").html("<p>You don't have permission to view this list. The owner of this list has not shared this list with you, or the list is not public.</p><button onclick='window.location.href = \"/todo/\"' class='btn btn-primary form-control'>Go To My Lists</button>");
+                    $("#items").html("<p>In order to view this list, you must enter a password.</p><input class='form-control' type='password' id='password-box'><button class='btn btn-success form-control' id='password-btn'>Go!<button onclick='window.location.href = \"/todo/\"' class='btn btn-primary form-control'>Cancel and Go To My Lists</button>");
+                    $("#password-btn").click(function(){
+                        var password = $("#password-box").val();
+                    	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
+                    	$("#lists").html("");
+                    	ref.once('value', function(d) {
+                    		if (password === d.val().sharingSettings.password) {
+                    		    
+                    		} else {
+                    		    
+                    		}
+                    	});
+                        
+                    });
                 }
             });
 
