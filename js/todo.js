@@ -113,6 +113,7 @@ function addItem(id, name, description, deadline) {
 	var deadlinewrapper = '<p><b>Deadline:</b> ' + deadline  + '</p>';
 	} else {
 		deadlinewrapper = '';
+		deadline = '';
 	}
 	console.log(description);
 	if (description === null || description === undefined) {
