@@ -156,22 +156,18 @@
             var uid = vars[2]; // 0 and 1 are '' and 'todo'
             var listid = vars[3];
             checkPermissions(user.uid, uid, listid, function(permission) {
-                if (permission === true) {
+                if (permission === true && action !== "#permission-denied") {
                     getList(listid, uid);
                     // check for actions
                     var actions = window.location.hash;
                     if (actions !== null && actions !== "" && actions !== "#" && actions !== " ") {
                         if (actions === "#delete") {
                             deleteItem();
-                        } else if (actions === "#permission-denied") {
-                            $("#list-title").html("Permission Denied.");
-                            $("#info-bar").hide();
-                            $("#items").html("<p>You don't have permission to view this list. The owner of this list has not shared this list with you, or the list is not public.</p><button onclick='window.location.href = \"/todo/\"' class='btn btn-primary form-control'>Go To My Lists</button>");
-                            alert("permission denid");
                         }
                     }
                 }
                 else {
+                    
                     window.location.hash = "permission-denied";
                     $("#list-title").html("Permission Denied.");
                     $("#info-bar").hide();
