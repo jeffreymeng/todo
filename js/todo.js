@@ -81,12 +81,12 @@ function addItemToFirebase(uid, id, name, description, deadline, priority) {
 }
 
 
-function getList(id, uid) {
+function getList(id, uid, dataUid) {
 
 	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
-	var dataRef = firebase.database().ref('users/' + uid + '/data/' + id + '/items').orderByChild('priority');
+	var dataRef = firebase.database().ref('users/' + dataUid + '/data/' + id + '/items').orderByChild('priority');
 	$("#lists").html("");
 	ref.once('value', function(d) {
 		var data = d.val();
@@ -103,6 +103,8 @@ function getList(id, uid) {
 	});
 	dataRef.on('child_added', function(d) {
 		var data = d.val();
+		console.log(data);
+		console.log("#checkbox-" + d.key);
 		$("#checkbox-" + d.key).prop("checked", data.ckecked);
 		
 	});
