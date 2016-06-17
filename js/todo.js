@@ -114,6 +114,7 @@ function addItem(id, name, description, deadline) {
 	} else {
 		var deadlinewrapper = '';
 	}
+	console.log(description);
 	var description = description || '';
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
