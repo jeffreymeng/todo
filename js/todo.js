@@ -118,7 +118,18 @@ function addItem(id, name, description, deadline) {
 	if (description === null || description === undefined) {
 		description = "";
 	}
-	var toappend = '' + 
+	
+       if ((description === null && deadline === null) || (description === undefined && deadline === undefined)) {
+       	toappend = '' + 
+		'<hr><div id="item-' + id + '">' + 
+	        '<div class="checkbox checkbox-success">' + 
+		        '<input id="checkbox-' + id + '" class="styled strikethrough item-checkbox" type="checkbox">' + 
+		        '<label for="checkbox-' + id + '" >' + name + '</label>' + 
+		    '</div>' + 
+		    
+        '</div>';
+       } else {
+       	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
 		        '<input id="checkbox-' + id + '" class="styled strikethrough item-checkbox" type="checkbox">' + 
@@ -131,15 +142,6 @@ function addItem(id, name, description, deadline) {
 		        '<p>' + description + '</p>' + 
 		        deadlinewrapper + 
 		    '</div>' + 
-        '</div>';
-       if ((description === null && deadline === null) || (description === undefined && deadline === undefined)) {
-       	toappend = '' + 
-		'<hr><div id="item-' + id + '">' + 
-	        '<div class="checkbox checkbox-success">' + 
-		        '<input id="checkbox-' + id + '" class="styled strikethrough item-checkbox" type="checkbox">' + 
-		        '<label for="checkbox-' + id + '" >' + name + '</label>' + 
-		    '</div>' + 
-		    
         '</div>';
        }
 	$("#items").append(toappend);
