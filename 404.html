@@ -156,10 +156,11 @@
             var uid = vars[2]; // 0 and 1 are '' and 'todo'
             var listid = vars[3];
             checkPermissions(user.uid, uid, listid, function(permission) {
-                if (permission === true && action !== "#permission-denied") {
+                var actions = window.location.hash;
+                if (permission === true && actions !== "#permission-denied") {
                     getList(listid, uid);
                     // check for actions
-                    var actions = window.location.hash;
+                    
                     if (actions !== null && actions !== "" && actions !== "#" && actions !== " ") {
                         if (actions === "#delete") {
                             deleteItem();
