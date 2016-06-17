@@ -101,6 +101,14 @@
                         </div>
 
                         <hr>
+                        <input class="form-control" type="text" id="create" placeholder="Create a list">
+                        <div id="create-list" class="collapse">
+                            <label for="details">Details/Description</label>
+                            <textarea class="form-control" id="details" height="300px" placeholder="Add details about what you are going to do.(optional)"></textarea>
+                            <button class="btn btn-danger" id="cancel" onclick="$('#add-item').collapse('hide');"><i class="fa fa-times"></i>Cancel</button>&nbsp;&nbsp;
+                            <button class="btn btn-success" id="add"><i class="fa fa-check"></i>Add!</button>
+                        </div>
+                        <hr>
                         <div id="lists"></div>
                     </div>
                 </div>
@@ -140,8 +148,8 @@
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
         /* global firebase $ */
-        $("#item").click(function() {
-            $('#add-item').collapse("show");
+        $("#create").click(function() {
+            $('#create-list').collapse("show");
         });
 
         // Initialize Firebase
