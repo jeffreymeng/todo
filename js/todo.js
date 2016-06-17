@@ -109,14 +109,14 @@ function getList(id, uid, dataUid) {
 	});
 }
 function addItem(id, name, description, deadline) {
-	if (deadline !== null ) {
+	if (deadline !== null && deadline !== undefined) {
 	var deadlinewrapper = '<p><b>Deadline:</b> ' + deadline  + '</p>';
 	} else {
-		var deadlinewrapper = '';
+		deadlinewrapper = '';
 	}
 	console.log(description);
-	if (description === null) {
-		var description = "";
+	if (description === null || description === undefined) {
+		description = "";
 	}
 	var toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
@@ -132,7 +132,7 @@ function addItem(id, name, description, deadline) {
 		        deadlinewrapper + 
 		    '</div>' + 
         '</div>';
-       if (description === null && deadline === null) {
+       if ((description === null && deadline === null) || (description === undefined && deadline === undefined)) {
        	toappend = '' + 
 		'<hr><div id="item-' + id + '">' + 
 	        '<div class="checkbox checkbox-success">' + 
