@@ -128,7 +128,7 @@ function addItem(id, name, description, deadline) {
 		        '</a>' + 
 		    '</div>' + 
 		    '<div class="collapse" id="item-' + id + '-info">' + 
-		        '<p>' +  + '</p>' + 
+		        '<p>' + description + '</p>' + 
 		        deadlinewrapper + 
 		    '</div>' + 
         '</div>';
