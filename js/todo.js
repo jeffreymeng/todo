@@ -86,7 +86,7 @@ function getList(id, uid, dataUid) {
 	
 	var ref = firebase.database().ref('users/' + uid + '/lists/' + id);
 	var childRef = firebase.database().ref('users/' + uid + '/lists/' + id + '/items').orderByChild('priority');
-	var dataRef = firebase.database().ref('users/' + dataUid + '/data/' + id + '/items').orderByChild('priority');
+	var dataRef = firebase.database().ref('users/' + dataUid + '/data/' + id + '/items/').orderByChild('priority');
 	$("#lists").html("");
 	ref.once('value', function(d) {
 		var data = d.val();
